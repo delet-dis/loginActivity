@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void checkInputsLengths(TextInputEditText email, TextInputEditText password) {
-	if (emailInputEdit.length() > 4 && passwordInputEdit.length() <= 8 && passwordInputEdit.length() >= 3) {
+	if (email.length() > 4 && password.length() <= 8 && password.length() >= 3) {
 	  loginButton.setEnabled(true);
 	} else {
 	  loginButton.setEnabled(false);
