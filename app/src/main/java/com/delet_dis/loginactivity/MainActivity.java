@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
 	  @Override
 	  public void onTextChanged(CharSequence s, int start, int before, int count) {
-		if (emailInputEdit.hasFocus()) {
+		if (emailInputEdit.hasFocus() && emailInputEdit.length() != 0) {
 		  checkEmailLength(emailInputEdit, loginButton, emailWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 		}
-		if (passwordInputEdit.hasFocus()) {
+		if (passwordInputEdit.hasFocus() && passwordInputEdit.length() != 0) {
 		  checkPasswordLength(passwordInputEdit, loginButton, passwordWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 		}
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
 	  @Override
 	  public void onTextChanged(CharSequence s, int start, int before, int count) {
-		if (emailInputEdit.hasFocus()) {
+		if (emailInputEdit.hasFocus() && emailInputEdit.length() != 0) {
 		  checkEmailLength(emailInputEdit, loginButton, emailWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 		}
-		if (passwordInputEdit.hasFocus()) {
+		if (passwordInputEdit.hasFocus() && passwordInputEdit.length() != 0) {
 		  checkPasswordLength(passwordInputEdit, loginButton, passwordWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 		}
