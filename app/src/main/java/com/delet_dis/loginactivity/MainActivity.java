@@ -26,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
 	passwordInputEdit = findViewById(R.id.passwordInputEdit);
 	loginButton = findViewById(R.id.loginButton);
 
-	loginButton.setOnClickListener(new View.OnClickListener() {
-	  @Override
-	  public void onClick(View v) {
-		checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
-	  }
-	});
+//	loginButton.setOnClickListener(new View.OnClickListener() {
+//	  @Override
+//	  public void onClick(View v) {
+//		checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
+//	  }
+//	});
 
 	checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 
