@@ -72,9 +72,6 @@ public class MainActivity extends AppCompatActivity {
 	} else {
 	  login.setEnabled(false);
 	}
-	if (email.length() < 4) {
-	  email.setError("Error");
-	}
   }
 
 }
