@@ -20,7 +20,7 @@
           tools:srcCompat="@drawable/ic_main_logo_50" />
 
   <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/emaiInput"
+          android:id="@+id/emailInput"
           android:layout_width="328dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="230dp"
@@ -54,7 +54,7 @@
           app:hintEnabled="true"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/emaiInput"
+          app:layout_constraintTop_toBottomOf="@+id/emailInput"
           app:passwordToggleEnabled="true"
           app:passwordToggleTintMode="multiply">
 
