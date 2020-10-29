@@ -26,7 +26,14 @@ public class MainActivity extends AppCompatActivity {
 	passwordInputEdit = findViewById(R.id.passwordInputEdit);
 	loginButton = findViewById(R.id.loginButton);
 
-	checkInputsLengths(emailInputEdit, passwordInputEdit);
+	loginButton.setOnClickListener(new View.OnClickListener() {
+	  @Override
+	  public void onClick(View v) {
+		checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
+	  }
+	});
+
+	checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 
 	emailInputEdit.addTextChangedListener(new TextWatcher() {
 	  @Override
@@ -35,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 	  @Override
 	  public void onTextChanged(CharSequence s, int start, int before, int count) {
-		checkInputsLengths(emailInputEdit, passwordInputEdit);
+		checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 	  }
 
 	  @Override
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
 	  @Override
 	  public void onTextChanged(CharSequence s, int start, int before, int count) {
-		checkInputsLengths(emailInputEdit, passwordInputEdit);
+		checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
 	  }
 
 	  @Override
@@ -59,11 +66,14 @@ public class MainActivity extends AppCompatActivity {
 	});
   }
 
-  public void checkInputsLengths(TextInputEditText email, TextInputEditText password) {
+  public void checkInputsLengths(TextInputEditText email, TextInputEditText password, Button login) {
 	if (email.length() > 4 && password.length() <= 8 && password.length() >= 3) {
-	  loginButton.setEnabled(true);
+	  login.setEnabled(true);
 	} else {
-	  loginButton.setEnabled(false);
+	  login.setEnabled(false);
+	}
+	if (email.length() < 4) {
+	  email.setError("Error");
 	}
   }
 
