@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 	});
   }
 
-  public void checkInputsLengths(TextInputEditText email, TextInputEditText password, Button login) {
+  private void checkInputsLengths(TextInputEditText email, TextInputEditText password, Button login) {
 	if (email.length() >= MIN_EMAIL_LENGTH && password.length() <= MAX_PASSWORD_LENGTH && password.length() >= MIN_PASSWORD_LENGTH) {
 	  login.setEnabled(true);
 	} else {
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 	}
   }
 
-  public void checkEmailLength(TextInputEditText email, Button login, TextInputLayout wrapper) {
+  private void checkEmailLength(TextInputEditText email, Button login, TextInputLayout wrapper) {
 	if (email.length() < MIN_EMAIL_LENGTH) {
 	  wrapper.setError(getString(R.string.emailError));
 	  login.setEnabled(false);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 	}
   }
 
-  public void checkPasswordLength(TextInputEditText password, Button login, TextInputLayout wrapper) {
+  private void checkPasswordLength(TextInputEditText password, Button login, TextInputLayout wrapper) {
 	if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
 	  wrapper.setError(getString(R.string.passwordError));
 	  login.setEnabled(false);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 	}
   }
 
-  public void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW) {
+  private void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW) {
 	email.setText("");
 	password.setText("");
 	email.clearFocus();
