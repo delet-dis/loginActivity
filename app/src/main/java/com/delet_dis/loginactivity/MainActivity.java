@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
   private TextInputLayout emailWrapper;
   private TextInputLayout passwordWrapper;
 
+  private final int MAX_PASSWORD_LENGTH = 8;
+  private final int MIN_PASSWORD_LENGTH = 3;
+  private final int MIN_EMAIL_LENGTH = 4;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 	loginButton.setOnClickListener(new View.OnClickListener() {
 	  @Override
 	  public void onClick(View v) {
-		loginButtonOnclick(emailInputEdit, passwordInputEdit);
+		loginButtonOnclick(emailInputEdit, passwordInputEdit, emailWrapper, passwordWrapper);
 	  }
 	});
 
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void checkInputsLengths(TextInputEditText email, TextInputEditText password, Button login) {
-	if (email.length() >= 4 && password.length() <= 8 && password.length() >= 3) {
+	if (email.length() >= MIN_EMAIL_LENGTH && password.length() <= MAX_PASSWORD_LENGTH && password.length() >= MIN_PASSWORD_LENGTH) {
 	  login.setEnabled(true);
 	} else {
 	  login.setEnabled(false);
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void checkEmailLength(TextInputEditText email, Button login, TextInputLayout wrapper) {
-	if (email.length() < 4) {
+	if (email.length() < MIN_EMAIL_LENGTH) {
 	  wrapper.setError(getString(R.string.emailError));
 	  login.setEnabled(false);
 	} else {
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void checkPasswordLength(TextInputEditText password, Button login, TextInputLayout wrapper) {
-	if (password.length() < 3 || password.length() > 8) {
+	if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
 	  wrapper.setError(getString(R.string.passwordError));
 	  login.setEnabled(false);
 	} else {
@@ -113,14 +117,14 @@ public class MainActivity extends AppCompatActivity {
 	}
   }
 
-  public void loginButtonOnclick(TextInputEditText email, TextInputEditText password) {
+  public void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW) {
 	email.setText("");
 	password.setText("");
 	email.clearFocus();
 	password.clearFocus();
 
-	emailWrapper.setError(null);
-	passwordWrapper.setError(null);
+	emailW.setError(null);
+	passwordW.setError(null);
   }
 
 }
