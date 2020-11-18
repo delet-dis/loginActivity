@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW, Button button) {
+	afterLoginOrRegisterActivityGo(email, password);
+
 	email.setText("");
 	password.setText("");
 	email.clearFocus();
@@ -139,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
 	passwordW.setError(null);
 
 	checkPasswordCorrectness(password, button);
-
-	afterLoginOrRegisterActivityGo(email, password);
   }
 
   private void afterLoginOrRegisterActivityGo(TextInputEditText email, TextInputEditText password) {
