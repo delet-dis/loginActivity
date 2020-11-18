@@ -4,6 +4,8 @@
   <string name="emailHint">Enter email</string>
   <string name="passwordHint">Enter password</string>
   <string name="loginText">Login</string>
+  <string name="registerText">Register</string>
   <string name="emailError">Length of email should be greater than 4</string>
   <string name="passwordError">Length of password should be greater than 3 and less than 8</string>
+  <string name="matchingPassword">qwerty</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.delet_dis.loginactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 	loginButton.setOnClickListener(new View.OnClickListener() {
 	  @Override
 	  public void onClick(View v) {
-		loginButtonOnclick(emailInputEdit, passwordInputEdit, emailWrapper, passwordWrapper);
+		loginButtonOnclick(emailInputEdit, passwordInputEdit, emailWrapper, passwordWrapper, loginButton);
 	  }
 	});
 
@@ -54,10 +55,12 @@ public class MainActivity extends AppCompatActivity {
 		if (emailInputEdit.hasFocus() && emailInputEdit.length() != 0) {
 		  checkEmailLength(emailInputEdit, loginButton, emailWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
+		  checkPasswordCorrectness(passwordInputEdit, loginButton);
 		}
 		if (passwordInputEdit.hasFocus() && passwordInputEdit.length() != 0) {
 		  checkPasswordLength(passwordInputEdit, loginButton, passwordWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
+		  checkPasswordCorrectness(passwordInputEdit, loginButton);
 		}
 	  }
 
@@ -76,10 +79,12 @@ public class MainActivity extends AppCompatActivity {
 		if (emailInputEdit.hasFocus() && emailInputEdit.length() != 0) {
 		  checkEmailLength(emailInputEdit, loginButton, emailWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
+		  checkPasswordCorrectness(passwordInputEdit, loginButton);
 		}
 		if (passwordInputEdit.hasFocus() && passwordInputEdit.length() != 0) {
 		  checkPasswordLength(passwordInputEdit, loginButton, passwordWrapper);
 		  checkInputsLengths(emailInputEdit, passwordInputEdit, loginButton);
+		  checkPasswordCorrectness(passwordInputEdit, loginButton);
 		}
 	  }
 
@@ -117,7 +122,15 @@ public class MainActivity extends AppCompatActivity {
 	}
   }
 
-  private void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW) {
+  private void checkPasswordCorrectness(TextInputEditText password, Button login) {
+	if (!password.getText().toString().equals(getString(R.string.matchingPassword))) {
+	  login.setText(getString(R.string.registerText));
+	} else {
+	  login.setText(getString(R.string.loginText));
+	}
+  }
+
+  private void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW, Button button) {
 	email.setText("");
 	password.setText("");
 	email.clearFocus();
@@ -125,6 +138,15 @@ public class MainActivity extends AppCompatActivity {
 
 	emailW.setError(null);
 	passwordW.setError(null);
+
+	checkPasswordCorrectness(password,button);
+
+	afterLoginOrRegisterActivityGo();
+  }
+
+  private void afterLoginOrRegisterActivityGo(){
+	Intent afterLoginOrRegisterActivityGo = new Intent(MainActivity.this, UserRegistrationActivity.class);
+	startActivity(afterLoginOrRegisterActivityGo);
   }
 
 }
