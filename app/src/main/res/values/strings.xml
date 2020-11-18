@@ -8,4 +8,6 @@
   <string name="emailError">Length of email should be greater than 4</string>
   <string name="passwordError">Length of password should be greater than 3 and less than 8</string>
   <string name="matchingPassword">qwerty</string>
+  <string name="forwardedData">Forwarded data:</string>
+  <string name="noForwardedData">Forwarded data is empty</string>
 </resources>

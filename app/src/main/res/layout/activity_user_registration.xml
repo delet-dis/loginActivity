@@ -6,4 +6,42 @@
         android:layout_height="match_parent"
         tools:context=".UserRegistrationActivity">
 
+  <TextView
+          android:text="@string/forwardedData"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/forwardedData"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_marginTop="170dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:textSize="20sp"
+          android:textColor="@android:color/black"
+          android:textAlignment="center" />
+
+  <TextView
+          android:text="@string/noForwardedData"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/forwardedEmail"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:textSize="20sp"
+          android:textColor="@android:color/black"
+          app:layout_constraintTop_toBottomOf="@+id/forwardedData"
+          android:layout_marginTop="20dp"
+          android:textAlignment="center" />
+
+  <TextView
+          android:text="@string/noForwardedData"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/forwardedPassword"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:textSize="20sp"
+          android:textColor="@android:color/black"
+          app:layout_constraintTop_toBottomOf="@+id/forwardedEmail"
+          android:textAlignment="center"
+          android:layout_marginTop="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

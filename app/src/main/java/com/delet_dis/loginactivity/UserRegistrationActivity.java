@@ -1,9 +1,9 @@
 package com.delet_dis.loginactivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActionBar;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
@@ -13,9 +13,23 @@ public class UserRegistrationActivity extends AppCompatActivity {
 	setContentView(R.layout.activity_user_registration);
 
 	addBackButton();
+
+	TextView forwardedEmail = findViewById(R.id.forwardedEmail);
+	TextView forwardedPassword = findViewById(R.id.forwardedPassword);
+
+	forwardedEmail.setText(getForwardedEmail());
+	forwardedPassword.setText(getForwardedPassword());
   }
 
-  private void addBackButton(){
+  private String getForwardedEmail() {
+	return getIntent().getStringExtra("email");
+  }
+
+  private String getForwardedPassword() {
+	return getIntent().getStringExtra("password");
+  }
+
+  private void addBackButton() {
 	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
 }
