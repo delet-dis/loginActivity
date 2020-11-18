@@ -14,15 +14,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+  private final int MAX_PASSWORD_LENGTH = 8;
+  private final int MIN_PASSWORD_LENGTH = 3;
+  private final int MIN_EMAIL_LENGTH = 4;
   private TextInputEditText emailInputEdit;
   private TextInputEditText passwordInputEdit;
   private Button loginButton;
   private TextInputLayout emailWrapper;
   private TextInputLayout passwordWrapper;
-
-  private final int MAX_PASSWORD_LENGTH = 8;
-  private final int MIN_PASSWORD_LENGTH = 3;
-  private final int MIN_EMAIL_LENGTH = 4;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -139,13 +138,20 @@ public class MainActivity extends AppCompatActivity {
 	emailW.setError(null);
 	passwordW.setError(null);
 
-	checkPasswordCorrectness(password,button);
+	checkPasswordCorrectness(password, button);
 
-	afterLoginOrRegisterActivityGo();
+	afterLoginOrRegisterActivityGo(email, password);
   }
 
-  private void afterLoginOrRegisterActivityGo(){
+  private void afterLoginOrRegisterActivityGo(TextInputEditText email, TextInputEditText password) {
 	Intent afterLoginOrRegisterActivityGo = new Intent(MainActivity.this, UserRegistrationActivity.class);
+
+	String emailForForwarding = email.getText().toString();
+	String passwordForForwarding = password.getText().toString();
+
+	afterLoginOrRegisterActivityGo.putExtra("email", emailForForwarding);
+	afterLoginOrRegisterActivityGo.putExtra("password", passwordForForwarding);
+
 	startActivity(afterLoginOrRegisterActivityGo);
   }
 
