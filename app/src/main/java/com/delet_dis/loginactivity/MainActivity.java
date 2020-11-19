@@ -6,11 +6,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 	emailInputEdit = findViewById(R.id.emailInputEdit);
 	passwordInputEdit = findViewById(R.id.passwordInputEdit);
-	loginButton = findViewById(R.id.loginButton);
+	loginButton = findViewById(R.id.registerButton);
 	emailWrapper = findViewById(R.id.emailInput);
 	passwordWrapper = findViewById(R.id.passwordInput);
 
@@ -93,12 +96,22 @@ public class MainActivity extends AppCompatActivity {
 	});
   }
 
-  private void checkInputsLengths(TextInputEditText email, TextInputEditText password, Button login) {
-	if (email.length() >= MIN_EMAIL_LENGTH && password.length() <= MAX_PASSWORD_LENGTH && password.length() >= MIN_PASSWORD_LENGTH) {
-	  login.setEnabled(true);
-	} else {
-	  login.setEnabled(false);
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+	if (requestCode == 1) {
+	  if (resultCode == RESULT_OK) {
+		emailInputEdit.setText(data.getStringExtra("email"));
+		showRegistrationToast(data.getStringExtra("email"));
+
+		passwordInputEdit.setText("");
+		passwordInputEdit.clearFocus();
+	  }
 	}
+  }
+
+  private void checkInputsLengths(TextInputEditText email, TextInputEditText password, Button login) {
+	login.setEnabled(email.length() >= MIN_EMAIL_LENGTH && password.length() <= MAX_PASSWORD_LENGTH && password.length() >= MIN_PASSWORD_LENGTH);
   }
 
   private void checkEmailLength(TextInputEditText email, Button login, TextInputLayout wrapper) {
@@ -122,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void checkPasswordCorrectness(TextInputEditText password, Button login) {
-	if (!password.getText().toString().equals(getString(R.string.matchingPassword))) {
+	if (!Objects.requireNonNull(password.getText()).toString().equals(getString(R.string.matchingPassword))) {
 	  login.setText(getString(R.string.registerText));
 	} else {
 	  login.setText(getString(R.string.loginText));
@@ -130,29 +143,48 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void loginButtonOnclick(TextInputEditText email, TextInputEditText password, TextInputLayout emailW, TextInputLayout passwordW, Button button) {
-	afterLoginOrRegisterActivityGo(email, password);
 
-	email.setText("");
-	password.setText("");
-	email.clearFocus();
-	password.clearFocus();
+	if (checkIfRegistrationIsNeeded(password)) {
+	  forwardForRegistration(email, password);
+	} else {
 
-	emailW.setError(null);
-	passwordW.setError(null);
+	  showLoginToast(Objects.requireNonNull(email.getText()).toString());
+
+	  email.setText("");
+	  password.setText("");
+	  email.clearFocus();
+	  password.clearFocus();
+
+	  emailW.setError(null);
+	  passwordW.setError(null);
+	}
 
 	checkPasswordCorrectness(password, button);
   }
 
-  private void afterLoginOrRegisterActivityGo(TextInputEditText email, TextInputEditText password) {
+  private void forwardForRegistration(TextInputEditText email, TextInputEditText password) {
 	Intent afterLoginOrRegisterActivityGo = new Intent(MainActivity.this, UserRegistrationActivity.class);
 
-	String emailForForwarding = email.getText().toString();
-	String passwordForForwarding = password.getText().toString();
+	String emailForForwarding = Objects.requireNonNull(email.getText()).toString();
+	String passwordForForwarding = Objects.requireNonNull(password.getText()).toString();
 
 	afterLoginOrRegisterActivityGo.putExtra("email", emailForForwarding);
 	afterLoginOrRegisterActivityGo.putExtra("password", passwordForForwarding);
 
-	startActivity(afterLoginOrRegisterActivityGo);
+	startActivityForResult(afterLoginOrRegisterActivityGo, 1);
   }
+
+  private boolean checkIfRegistrationIsNeeded(TextInputEditText password) {
+	return !Objects.requireNonNull(password.getText()).toString().equals(getString(R.string.matchingPassword));
+  }
+
+  private void showLoginToast(String email) {
+	Toast.makeText(getApplicationContext(), getString(R.string.successfulLogin) + email, Toast.LENGTH_LONG).show();
+  }
+
+  private void showRegistrationToast(String email) {
+	Toast.makeText(getApplicationContext(), getString(R.string.successfulRegistration) + email, Toast.LENGTH_LONG).show();
+  }
+
 
 }

@@ -10,4 +10,6 @@
   <string name="matchingPassword">qwerty</string>
   <string name="forwardedData">Forwarded data:</string>
   <string name="noForwardedData">Forwarded data is empty</string>
+  <string name="successfulLogin">Successful logged in as:</string>
+  <string name="successfulRegistration">Successful registered as:</string>
 </resources>

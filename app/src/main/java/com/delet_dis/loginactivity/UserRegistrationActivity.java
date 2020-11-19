@@ -1,9 +1,15 @@
 package com.delet_dis.loginactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Objects;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
@@ -12,13 +18,27 @@ public class UserRegistrationActivity extends AppCompatActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_user_registration);
 
-	addBackButton();
+	addBackButtonAndTitle();
 
-	TextView forwardedEmail = findViewById(R.id.forwardedEmail);
-	TextView forwardedPassword = findViewById(R.id.forwardedPassword);
+	TextInputEditText email = findViewById(R.id.emailInputEdit);
+	TextInputEditText password = findViewById(R.id.passwordInputEdit);
+	Button register = findViewById(R.id.registerButton);
 
-	forwardedEmail.setText(getForwardedEmail());
-	forwardedPassword.setText(getForwardedPassword());
+	email.setText(getForwardedEmail());
+	password.setText(getForwardedPassword());
+
+	final Intent forwardUserDataBack = new Intent();
+
+	forwardUserDataBack.putExtra("email", Objects.requireNonNull(email.getText()).toString());
+	forwardUserDataBack.putExtra("password", Objects.requireNonNull(password.getText()).toString());
+
+	register.setOnClickListener(new View.OnClickListener() {
+	  @Override
+	  public void onClick(View v) {
+		setResult(RESULT_OK, forwardUserDataBack);
+		finish();
+	  }
+	});
   }
 
   private String getForwardedEmail() {
@@ -29,7 +49,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
 	return getIntent().getStringExtra("password");
   }
 
-  private void addBackButton() {
-	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  private void addBackButtonAndTitle() {
+	Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+	getSupportActionBar().setTitle("Registration");
   }
 }
